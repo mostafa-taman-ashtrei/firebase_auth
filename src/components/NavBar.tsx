@@ -8,7 +8,7 @@ const Navbar: React.FC = () => (
     <Stack as="main" align="center" mb="2">
         <Flex p="2" w="100%" as="nav" flexDirection="row" pt="4" justify="space-between" backgroundColor="green.400">
             <Link to="/">
-                <Text>FireBase Auth</Text>
+                <Text fontSize="lg">FireBase Auth</Text>
             </Link>
             <ThemeToggle />
         </Flex>

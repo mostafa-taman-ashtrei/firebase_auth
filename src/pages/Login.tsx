@@ -10,16 +10,17 @@ import {
     Alert,
     AlertIcon,
 } from '@chakra-ui/react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 
-import { auth } from '../firebase';
 import MyInput from '../components/MyInput';
+import { auth } from '../firebase';
 
 const Login: React.FC = () => {
     const [loading, setLoading] = useState<Boolean>(false);
     const [error, setError] = useState<string | null>(null);
+    const history = useHistory();
 
     const {
         handleChange, handleSubmit, values, errors: fErrors, touched, handleBlur,
@@ -35,8 +36,8 @@ const Login: React.FC = () => {
         onSubmit: async ({ email, password }) => {
             setLoading(true);
             try {
-                const user = await auth.signInWithEmailAndPassword(email, password);
-                console.log(user);
+                await auth.signInWithEmailAndPassword(email, password);
+                history.push('/dashboard');
             } catch (e) {
                 setError(e.message);
             }

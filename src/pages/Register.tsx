@@ -13,8 +13,8 @@ import {
 import { Link as RouterLink } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import MyInput from '../components/MyInput';
 
+import MyInput from '../components/MyInput';
 import { auth } from '../firebase';
 
 interface alertInterface {
@@ -44,7 +44,6 @@ const Register: React.FC = () => {
             try {
                 const res = await auth.createUserWithEmailAndPassword(email, password);
                 res.user?.sendEmailVerification();
-                console.log(res);
                 setAlert({ message: `Success, check ${email} inbox for validation email`, type: 'success' });
             } catch (e) {
                 setAlert({ message: e.message, type: 'error' });
