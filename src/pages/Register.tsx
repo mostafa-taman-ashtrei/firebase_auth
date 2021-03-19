@@ -1,84 +1,124 @@
 import React, { useState } from 'react';
 import {
-    FormControl,
-    FormLabel,
-    Input,
     Box,
     Center,
     Heading,
     Button,
     Link,
     Text,
+    Progress,
+    Alert,
+    AlertIcon,
 } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
+import * as Yup from 'yup';
+import { useFormik } from 'formik';
+import MyInput from '../components/MyInput';
 
 import { auth } from '../firebase';
 
+interface alertInterface {
+    message: string
+    type: 'error' | 'success'
+}
+
 const Register: React.FC = () => {
     const [loading, setLoading] = useState<Boolean>(false);
-    const [email, setEmail] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
-    const [confirmPassword, setConfirmPassword] = useState<string>('');
+    const [alert, setAlert] = useState<alertInterface | null>(null);
 
-    const handleSubmit = async () => {
-        if (password !== confirmPassword) {
-            alert('Passwords must match');
-            return;
-        }
-        try {
+    const {
+        handleChange, handleSubmit, values, errors: fErrors, touched, handleBlur,
+    } = useFormik({
+        initialValues: {
+            email: '',
+            password: '',
+            confirmPassword: '',
+        },
+        validationSchema: Yup.object({
+            email: Yup.string().min(2, 'Email must be at leat 2 chars').email('Invalid email').required('Required Field'),
+            password: Yup.string().min(8, 'Password must be at leat 8 chars').required('Required Field'),
+            confirmPassword: Yup.string().required('Required Field').oneOf([Yup.ref('password'), null], 'Passwords must match'),
+        }),
+        onSubmit: async ({ email, password }) => {
             setLoading(true);
-            const res = await auth.createUserWithEmailAndPassword(email, password);
-            res.user?.sendEmailVerification();
-            console.log(res);
-        } catch (err) {
-            console.log(err);
-        }
-        console.log(email, password, confirmPassword);
-        setLoading(false);
-    };
+            try {
+                const res = await auth.createUserWithEmailAndPassword(email, password);
+                res.user?.sendEmailVerification();
+                console.log(res);
+                setAlert({ message: `Success, check ${email} inbox for validation email`, type: 'success' });
+            } catch (e) {
+                setAlert({ message: e.message, type: 'error' });
+            }
+            setLoading(false);
+        },
+    });
 
-    if (loading) return <h1>Loading</h1>;
+    if (loading) return <Progress size="xs" isIndeterminate />;
 
     return (
         <Center>
             <Box w="xl" p={8} shadow="2xl">
+                {
+                    alert
+                        ? (
+                            <Alert status={alert.type}>
+                                <AlertIcon />
+                                {alert.message}
+                            </Alert>
+                        ) : null
+                }
                 <Heading size="lg" mb="5">Sign up</Heading>
+
                 <form onSubmit={handleSubmit}>
-                    <FormControl id="email" isRequired>
-                        <FormLabel>Email</FormLabel>
-                        <Input
-                            type="email"
-                            size="lg"
-                            variant="filled"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                    </FormControl>
+                    <MyInput
+                        label="Email"
+                        placeholder="Email ..."
+                        id="email"
+                        type="email"
+                        size="lg"
+                        variant="filled"
+                        value={values.email}
+                        setValue={handleChange}
+                        handleBlur={handleBlur}
+                        error={
+                            touched.email && fErrors.email ? fErrors.email : undefined
+                        }
+                    />
 
-                    <FormControl id="password" isRequired>
-                        <FormLabel>Password</FormLabel>
-                        <Input
-                            type="password"
-                            size="lg"
-                            variant="filled"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </FormControl>
+                    <MyInput
+                        label="Password"
+                        placeholder="Password ..."
+                        id="password"
+                        type="password"
+                        size="lg"
+                        variant="filled"
+                        value={values.password}
+                        setValue={handleChange}
+                        handleBlur={handleBlur}
+                        error={
+                            touched.password && fErrors.password ? fErrors.password : undefined
+                        }
+                    />
 
-                    <FormControl id="confirm-password" isRequired>
-                        <FormLabel>Confirm Password</FormLabel>
-                        <Input
-                            type="password"
-                            size="lg"
-                            variant="filled"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                        />
-                    </FormControl>
+                    <MyInput
+                        label="ConfirmPassword"
+                        placeholder="ConfirmPassword ..."
+                        id="confirmPassword"
+                        type="password"
+                        size="lg"
+                        variant="filled"
+                        value={values.confirmPassword}
+                        setValue={handleChange}
+                        handleBlur={handleBlur}
+                        error={
+                            touched.confirmPassword && fErrors.confirmPassword
+                                ? fErrors.confirmPassword : undefined
+                        }
+                    />
 
-                    <Button background="green.400" mt="3" size="lg" w="full" onClick={handleSubmit}>Register</Button>
+                    <Button background="green.400" mt="3" size="lg" w="full" type="submit">Register</Button>
                 </form>
+
                 <Text mt="2.5">
                     Already have an account?
                     {' '}
