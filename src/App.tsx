@@ -12,6 +12,8 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import AuthProvider from './context/authContext';
 import Dashboard from './pages/Dashboard';
+import UpdateProfile from './pages/UpdateProfile';
+import PrivateRoute from './utils/PrivateRoute';
 
 const App: React.FC = () => (
     <Router>
@@ -23,7 +25,8 @@ const App: React.FC = () => (
                         <Route exact path="/" component={Home} />
                         <Route path="/register" component={Register} />
                         <Route path="/login" component={Login} />
-                        <Route path="/dashboard" component={Dashboard} />
+                        <PrivateRoute path="/dashboard" RouteComponent={Dashboard} />
+                        <PrivateRoute path="/update-profile" RouteComponent={UpdateProfile} />
                     </Switch>
                 </Box>
             </>
