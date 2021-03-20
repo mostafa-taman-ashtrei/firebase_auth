@@ -119,9 +119,6 @@ const Register: React.FC = () => {
                     {' '}
                     <Link as={RouterLink} to="/login" color="teal.500">login</Link>
                 </Text>
-                <Text mt="2.5">
-                    <Link as={RouterLink} to="/forgot-password" color="teal.500">Forgot Password?</Link>
-                </Text>
             </Box>
         </Center>
     );

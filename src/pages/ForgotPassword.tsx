@@ -54,7 +54,7 @@ const ForgotPassword: React.FC = () => {
                             </Alert>
                         ) : null
                 }
-                <Heading size="lg" mb="5">Sign up</Heading>
+                <Heading size="lg" mb="5">Reset Password</Heading>
 
                 <form onSubmit={handleSubmit}>
                     <MyInput
