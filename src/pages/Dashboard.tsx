@@ -2,13 +2,14 @@ import React from 'react';
 import {
     Button, Heading, Text, Box,
 } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { useAuth } from '../context/authContext';
 import { auth } from '../firebase';
 
 const Dashboard: React.FC = () => {
     const { currentUser } = useAuth();
+    const history = useHistory();
 
     return (
         <div>
@@ -23,7 +24,21 @@ const Dashboard: React.FC = () => {
                         Your account is
                         {currentUser?.emailVerified ? ' verified' : ' not verified'}
                     </Text>
-                    <Button background="green.400" mt="3" size="lg" w="md" onClick={() => auth.signOut()}>Logout</Button>
+                    <Link to="/update-profile">
+                        <Button background="green.400" mt="3" size="lg" w="md">Update Profile</Button>
+                    </Link>
+                    <Button
+                        background="green.400"
+                        mt="3"
+                        size="lg"
+                        w="md"
+                        onClick={() => {
+                            auth.signOut();
+                            history.push('/');
+                        }}
+                    >
+                        Logout
+                    </Button>
                 </>
             ) : (
                 <Box>

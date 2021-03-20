@@ -16,11 +16,7 @@ import { useFormik } from 'formik';
 
 import MyInput from '../components/MyInput';
 import { auth } from '../firebase';
-
-interface alertInterface {
-    message: string
-    type: 'error' | 'success'
-}
+import { alertInterface } from '../types';
 
 const Register: React.FC = () => {
     const [loading, setLoading] = useState<Boolean>(false);
@@ -122,6 +118,9 @@ const Register: React.FC = () => {
                     Already have an account?
                     {' '}
                     <Link as={RouterLink} to="/login" color="teal.500">login</Link>
+                </Text>
+                <Text mt="2.5">
+                    <Link as={RouterLink} to="/forgot-password" color="teal.500">Forgot Password?</Link>
                 </Text>
             </Box>
         </Center>

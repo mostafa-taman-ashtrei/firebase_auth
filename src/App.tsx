@@ -14,6 +14,7 @@ import AuthProvider from './context/authContext';
 import Dashboard from './pages/Dashboard';
 import UpdateProfile from './pages/UpdateProfile';
 import PrivateRoute from './utils/PrivateRoute';
+import ForgotPassword from './pages/ForgotPassword';
 
 const App: React.FC = () => (
     <Router>
@@ -25,6 +26,7 @@ const App: React.FC = () => (
                         <Route exact path="/" component={Home} />
                         <Route path="/register" component={Register} />
                         <Route path="/login" component={Login} />
+                        <Route path="/forgot-password" component={ForgotPassword} />
                         <PrivateRoute path="/dashboard" RouteComponent={Dashboard} />
                         <PrivateRoute path="/update-profile" RouteComponent={UpdateProfile} />
                     </Switch>
