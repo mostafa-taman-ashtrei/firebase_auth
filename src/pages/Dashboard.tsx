@@ -25,11 +25,11 @@ const Dashboard: React.FC = () => {
                         {currentUser?.emailVerified ? ' verified' : ' not verified'}
                     </Text>
                     <Link to="/update-profile">
-                        <Button background="green.400" mt="3" size="lg" w="md">Update Profile</Button>
+                        <Button background="green.400" m="3" size="lg" w="md">Update Profile</Button>
                     </Link>
                     <Button
                         background="green.400"
-                        mt="3"
+                        m="3"
                         size="lg"
                         w="md"
                         onClick={() => {
