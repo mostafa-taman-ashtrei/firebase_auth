@@ -1,13 +1,57 @@
-# Firebase Auth
+# **Firebase Authentication**
 
-A boilerplate for authentication using reactjs and firebase as the backend 
+A boilerplate for a full fledged authentication system using reactjs and firebase as the backend and styled with chakura ui
 
-## Usage
-install dependencies using :
+## Languages and Tools Used:
+
+- <img  alt="Visual Studio Code" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/visual-studio-code/visual-studio-code.png" /> vs code
+
+
+- <img   alt="Typescript" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/typescript/typescript.png" /> Typescript
+
+- <img   alt="React" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png" /> React
+
+
+- <img   alt="eslint" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/eslint/eslint.png" /> Eslint
+
+
+- <img   alt="Git" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/git/git.png" /> Git
+
+- <img   alt="Firebase" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/firebase/firebase.png" /> Firebase
+
+<br />
+
+# **Getting Started**
+
+Instructions to get the project up and running on your local machine
+
+## Installation
+1. clone the project using git or download zip
 ```bash
-npm i
+git clone https://github.com/neoScriptscode/firebase_auth.git
+```
+2. Install dependencies
+```bash
+cd firebase_auth && npm i
 ```
 
+3. Create a .env.local file and add firebase config variables.
+
+<br />
+
+## Screenshots
+**Home Page (Unauthenticated)**
+<img   alt="Home page" src="./screenshots/home.jpg" />
+
+**Login Page**
+<img   alt="Login page" src="./screenshots/login.jpg" />
+
+**Signup Page**
+<img   alt="Signup Page" src="./screenshots/signup.jpg" />
+
+**Dashboard**
+<img   alt="Dashboard" src="./screenshots/dashboard.jpg" />
+<br />
 
 ## Available Scripts
 
