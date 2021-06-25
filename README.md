@@ -41,7 +41,7 @@ cd firebase_auth && npm i
 
 ## Screenshots
 **Home Page (Unauthenticated)**
-<img   alt="Home page" src="./screenshots/home.jpg" />
+<img   alt="Home page" src="./screenshots/Home.jpg" />
 
 **Login Page**
 <img   alt="Login page" src="./screenshots/login.jpg" />
